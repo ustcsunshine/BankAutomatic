@@ -8,8 +8,8 @@ from time import sleep
 class CardRecommendationTest(myunit.MyTest):
 
     # 测试用户登陆
-    def user_login_verify(self, username, phone, url, numb):
-        login(self.driver).user_login(username, phone, url, numb)
+    def user_login_verify(self, username, phone, url, number):
+        login(self.driver).user_login(username, phone, url, number)
 
     def test_login_orgmiss(self):
         '''机构是1002的，正常登陆'''

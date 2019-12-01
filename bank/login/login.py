@@ -38,15 +38,15 @@ class login(Page):
         self.find_element(*send_sms_loc).send_keys(code)
 
     # 输入机构代码
-    def login_org(self, *numb):
-        self.find_element(*self.login_org_loc).send_keys(numb)
+    def login_org(self, org, login_org_loc):
+        self.find_element(*login_org_loc).send_keys(org)
 
     # 登陆按钮
     def login_button(self, login_button_loc):
         self.find_element(*login_button_loc).click()
 
     # 定义统一登陆接口
-    def user_login(self, username, phone, url, *numb):
+    def user_login(self, username, phone, url, number):
         # self.open()
         res = self.open(url)
         if res is None:
@@ -55,7 +55,7 @@ class login(Page):
         # self.bbs_login()
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
-        self.login_org(*numb)
+        self.login_org(number, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
         self.login_sms((By.XPATH, '//div[@id="smscode"]'))
         sleep(3)
         self.login_button((By.XPATH, '//div[@class="reviseBtn"]/p'))
@@ -77,7 +77,7 @@ class login(Page):
         self.login_button((By.XPATH, '//button[@class="confirm"]'))
         sleep(3)
 
-    def mgm_recommendation(self, phone,username,org,url):
+    def mgm_recommendation(self, phone, username, url, org):
         res = self.open(url)
         if res is None:
             print('Please input right index')
@@ -86,9 +86,8 @@ class login(Page):
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输入手机号码"]'))
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入姓名"]'))
         self.login_sms((By.XPATH, '//div[@id="smscode"]'))
-        self.login_org((By.XPATH, '//input[@placeholder="请输入合作方代码"]'))
-
-
+        self.login_org(org, (By.XPATH, '//input[@placeholder="请输入合作方代码"]'))
+        sleep(3)
         self.login_button((By.XPATH, '//p[@class="com"]'))
         sleep(3)
         sleep(3)
