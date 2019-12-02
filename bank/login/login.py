@@ -66,7 +66,6 @@ class login(Page):
         if res is None:
             print('Please input right index')
             return
-        # self.bbs_login()
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输入您的11位手机号码"]'))
         self.login_sms((By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[3]/div'))
         sleep(2)
@@ -92,10 +91,33 @@ class login(Page):
         sleep(3)
         sleep(3)
 
-    def userLogin(self):
-        print('-----1')
-        self.open(0)
-        print('------2')
+    def t_recommendation(self, phone, url, org):
+        res = self.open(url)
+        if res is None:
+            print('Please input right index')
+            return
+        # self.bbs_login()
+        self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输入您的11位手机号码"]'))
+        sleep(1)
+        self.login_sms((By.XPATH, '//div[@id="smscode"]'))
+        sleep(1)
+        self.login_org(org, (By.XPATH, '//input[@placeholder="请输入合作方代码"]'))
+        sleep(2)
+        self.login_button((By.XPATH, '//p[@class="com"]'))
+        sleep(2)
+
+    def gift_distribute(self, phone, url):
+        res = self.open(url)
+        if res is None:
+            print('Please input right url')
+            return
+        # self.bbs_login()
+        self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输入您的11位手机号码"]'))
+        sleep(1)
+        self.login_sms((By.XPATH, '//div[@id="smscode"]'))
+        sleep(1)
+        self.login_button((By.XPATH, '//p[@class="com"]'))
+        sleep(2)
 
     sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')
     # pawd_error_hint_loc=(By.XPATH,"//ng-tip/div")
