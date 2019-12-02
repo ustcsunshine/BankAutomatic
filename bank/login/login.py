@@ -52,7 +52,6 @@ class login(Page):
         if res is None:
             print('Please input right index')
             return
-        # self.bbs_login()
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
         self.login_org(number, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
@@ -76,7 +75,7 @@ class login(Page):
         self.login_button((By.XPATH, '//button[@class="confirm"]'))
         sleep(3)
 
-    def mgm_recommendation(self, phone, username, url, org):
+    def mgm_recommendation(self, phone, username, url, *org):
         res = self.open(url)
         if res is None:
             print('Please input right index')

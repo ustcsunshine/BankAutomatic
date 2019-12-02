@@ -1,7 +1,7 @@
 
 from bank.login.login import login
 from bank.test.models import myunit, function
-
+import unittest
 from time import sleep
 
 
@@ -20,86 +20,70 @@ class CardRecommendationTest(myunit.MyTest):
         sleep(3)
         message = self.driver.find_element_by_xpath('//p[@id="copyright"]').text
         self.assertIn(u'©本服务由兴业银行信用卡中心提供 v3.6.8', message)
-        function.insert_img(self.driver, "user_pawd_true3.png")
+        function.insert_img(self.driver, "user_pawd_true1.png")
 
         sleep(1)
 
-    # def test_login1(self):
-    #     # 用户名、手机号正确
-    #
-    #     self.user_login_verify(username="李孝雪", phone="17621523735")
-    #     po = login(self.driver)
-    #     sleep(3)
-    #     message = self.driver.find_element_by_xpath('//p[@id="copyright"]').text
-    #
-    #     self.assertIn(u'©本服务由兴业银行信用卡中心提供 v3.6.8', message)
-    #     # self.assertEqual(po.pawd_error_hint(),"密码不能为空")
-    #     print('成功登陆')
-    #     function.insert_img(self.driver, "user_pawd_true1.png")
-    #
-    #     sleep(1)
 
 
-'''
-    def test_login1(self):
-        用户名、手机号正确
 
+    def test_login_nullname(self):
 
-        self.user_login_verify(username="李孝雪",phone="17621523735")
+        #用户名、手机号正确
+        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
+        self.user_login_verify("","17621523737",url,1001)
         po=login(self.driver)
         sleep(3)
-        message = self.driver.find_element_by_xpath('//p[@id="copyright"]').text
-
-        self.assertIn(u'©本服务由兴业银行信用卡中心提供 v3.6.7',message)
-        # self.assertEqual(po.pawd_error_hint(),"密码不能为空")
-        print('成功登陆')
-        function.insert_img(self.driver,"user_pawd_true1.png")
+        self.assertIn("姓名为空或格式不正确", po.pawd_error_hint())
+        function.insert_img(self.driver, "user_name_miss2.png")
+        print('用户名为空，提示姓名为空或格式不正确')
         sleep(1)
 
 
+    def test_login_englishname(self):
 
-    def test_login_usermiss(self):
-        用户名不正确，手机号码正常
-        self.user_login_verify(username="jingj",phone="17621523730")
+        #用户名不正确，手机号码正常
+        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
+        self.user_login_verify( "jingj", "17621523730", url, 1001)
         po = login(self.driver)
 
         sleep(3)
         self.assertIn("姓名为空或格式不正确", po.pawd_error_hint())
-        function.insert_img(self.driver,"user_pawd_true2.png")
+        function.insert_img(self.driver,"user_name_miss3.png")
         print('用户名为拼音，提示姓名为空或格式不正确')
         sleep(1)
 
-    def test_login_smsmiss(self):
-       用户名正确，手机号码不正常
-        self.user_login_verify(username="李孝雪", phone="1762152373")
+    def test_login_numbmiss(self):
+
+       #用户名正确，手机号码少一位
+        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
+
+        self.user_login_verify("李孝雪", "1762152373" , url,1001)
         po = login(self.driver)
 
         sleep(3)
         self.assertIn("手机号为空或格式不正确", po.pawd_error_hint())
-        function.insert_img(self.driver, "user_pawd_true3.png")
-        print('手机不正确，少了一位数')
+        function.insert_img(self.driver, "user_numb_miss4.png")
+        print('用户名正确，手机号码少一位')
         sleep(1)
 
 
-    def test_login_smsmiss(self):
-       用户名正确，手机号码不正常
-        self.user_login_verify(username="李孝雪", phone="176215237x")
+
+
+    def test_login_numbenglish(self):
+        #手机不正确，不是数字
+        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
+
+        self.user_login_verify("李孝雪", "176215237x", url, 1001)
         po = login(self.driver)
 
         sleep(3)
         self.assertIn("手机号为空或格式不正确", po.pawd_error_hint())
-        function.insert_img(self.driver, "user_pawd_true3.png")
+        function.insert_img(self.driver, "user_numb_english5.png")
         print('手机不正确，不是数字')
         sleep(1)
-     
 
-    def test_login2(self):
-        用户名正确，密码错误
-        self.user_login_verify(username="lixiaoxue@csii.com.cn",password='12sd3456')
-        po=login(self.driver)
-        self.assertIn("密码不正确",po.pawd_error_hint())
-        function.insert_img(self.driver,"pawd_empty.png")
 
-'''
+
 if __name__ == "__main__":
     unittest.main()
