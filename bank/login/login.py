@@ -41,6 +41,10 @@ class login(Page):
     def login_org(self, org, login_org_loc):
         self.find_element(*login_org_loc).send_keys(org)
 
+    # 输入身份证
+    def login_identity(self, identity, login_identity_loc):
+        self.find_element(*login_identity_loc).send_keys(identity)
+
     # 登陆按钮
     def login_button(self, login_button_loc):
         self.find_element(*login_button_loc).click()
@@ -52,6 +56,7 @@ class login(Page):
         if res is None:
             print('Please input right index')
             return
+        # self.bbs_login()
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
         self.login_org(number, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
@@ -75,7 +80,7 @@ class login(Page):
         self.login_button((By.XPATH, '//button[@class="confirm"]'))
         sleep(3)
 
-    def mgm_recommendation(self, phone, username, url, *org):
+    def mgm_recommendation(self, phone, username, url, org):
         res = self.open(url)
         if res is None:
             print('Please input right index')
@@ -117,6 +122,49 @@ class login(Page):
         sleep(1)
         self.login_button((By.XPATH, '//p[@class="com"]'))
         sleep(2)
+
+
+    def fast_progress(self, identity, url):
+
+        res = self.open(url)
+        if res is None:
+            print('Please input right url')
+            return
+        self.login_identity(identity, (By.XPATH, '//input[@placeholder="请输入您的身份证号码"]'))
+        sleep(1)
+        self.login_button((By.XPATH, '//p[@class="com"]'))
+
+    def customer_progress(self, identity, phone, url):
+        res = self.open(url)
+        if res is None:
+            print('Please input right url')
+            return
+        self.login_identity(identity, (By.XPATH, '//input[@placeholder="请输入您的身份证号码"]'))
+        sleep(1)
+        self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输入办卡所用手机号"]'))
+        sleep(1)
+        self.login_sms((By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/button'))
+        sleep(2)
+        code = self.driver.find_element_by_xpath('//*[@id="app"]/div/ul/div')
+        print('code: ' + code.text)
+
+        self.fill_login_sms((By.XPATH, '//input[@placeholder="请输入获取的验证码"]'), code.text)
+        sleep(2)
+        self.login_button((By.XPATH, '//p[@class="com"]'))
+
+
+    def t_code(self, phone, url):
+        res = self.open(url)
+        if res is None:
+            print('Please input right url')
+            return
+        self.login_phone(phone, (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input'))
+        sleep(1)
+        self.login_sms((By.XPATH, '//div[@id="smscode"]'))
+        sleep(1)
+        self.login_button((By.XPATH, '//p[@class="com"]'))
+
+
 
     sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')
     # pawd_error_hint_loc=(By.XPATH,"//ng-tip/div")
