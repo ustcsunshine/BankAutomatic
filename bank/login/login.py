@@ -49,6 +49,44 @@ class login(Page):
     def login_button(self, login_button_loc):
         self.find_element(*login_button_loc).click()
 
+
+    # 立即申请按钮
+    def apply_button(self, apply_button_loc):
+        self.find_element(*apply_button_loc).click()
+
+    # 同意按钮
+    def agree_button(self, agree_button_loc):
+        self.find_element(*agree_button_loc).click()
+
+
+
+    # 输入单位名称
+    def login_company(self, company, login_company_loc):
+        self.find_element(*login_company_loc).send_keys(company)
+
+
+
+    #部门名称
+    def department_name(self, departname, department_name_loc):
+        self.find_element(*department_name_loc).send_keys(departname)
+
+    #单位地址
+    def department_addr(self, departaddr, department_addr_loc):
+        self.find_element(*department_addr_loc).send_keys(departaddr)
+
+    #年收入
+    def annual_salary(self, salary, annual_salary_loc):
+        self.find_element(*annual_salary_loc).send_keys(salary)
+
+
+    #婚姻状况
+    def marry_status(self,marry_status_loc ):
+        self.find_element(*marry_status_loc).click()
+
+    #
+
+
+
     # 定义统一登陆接口
     def user_login(self, username, phone, url, number):
         # self.open()
@@ -164,6 +202,27 @@ class login(Page):
         sleep(1)
         self.login_button((By.XPATH, '//p[@class="com"]'))
 
+
+    def apply_card(self, username,identity, phone, url):
+        res = self.open(url)
+        if res is None:
+            print('Please input right url')
+            return
+        self.login_username(username, (By.XPATH, '//input[@placeholder="请输入身份证上的姓名"]'))
+        sleep(1)
+        self.login_identity(identity, (By.XPATH, '//input[@placeholder="请输入您的18位身份证号码"]'))
+        sleep(1)
+        self.login_phone(phone, (By.XPATH, '//*[@id="tel"]'))
+        sleep(1)
+        self.login_sms((By.XPATH, '//button[@id="yz"]'))
+        sleep(2)
+        code = self.driver.find_element_by_xpath('//*[@id="smsCodeShow"]')
+        print('code: ' + code.text)
+
+        sleep(1)
+        self.fill_login_sms((By.XPATH, '//*[@id="identifyCode"]'), code.text)
+        sleep(1)
+        self.login_button((By.XPATH, '//*[@id="next"]'))
 
 
     sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')
