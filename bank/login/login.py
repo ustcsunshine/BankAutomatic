@@ -3,7 +3,7 @@ from bank.utils.base import Page
 from time import sleep
 
 
-class login(Page):
+class Login(Page):
     url = '/'
 
     # bbs_login_user_loc=(By.XPATH,"//div[@id='mzCust']/div/img")
@@ -66,13 +66,41 @@ class login(Page):
 
 
 
+    # 输入区号
+    def area_code(self, area, area_code_loc):
+        self.find_element(*area_code_loc).send_keys(area)
+
+
+    # 输入区号后面的单位号码
+    def fixed_phone(self, line, fixed_phone_loc):
+        self.find_element(*fixed_phone_loc).send_keys(line)
+
+
+
+
     #部门名称
     def department_name(self, departname, department_name_loc):
         self.find_element(*department_name_loc).send_keys(departname)
 
+
+
+
+
+
+
+
     #单位地址
     def department_addr(self, departaddr, department_addr_loc):
         self.find_element(*department_addr_loc).send_keys(departaddr)
+
+
+
+
+    #家庭地址
+    def home_addr(self, homeaddr, home_addr_loc):
+        self.find_element(*home_addr_loc).send_keys(homeaddr)
+
+
 
     #年收入
     def annual_salary(self, salary, annual_salary_loc):
@@ -83,7 +111,9 @@ class login(Page):
     def marry_status(self,marry_status_loc ):
         self.find_element(*marry_status_loc).click()
 
-    #
+    #学历状况
+    def educational_status(self,educational_loc):
+        self.find_element(*educational_loc).click()
 
 
 
@@ -234,7 +264,7 @@ class login(Page):
         return self.find_element(*self.sms_error_hint_loc).text
 
     # 验证码错误提示
-    def pawd_error_hint(self):
+    def pwd_error_hint(self):
         return self.find_element(*self.sms_error_hint_loc).text
 
     # 等了成功用户名
