@@ -14,7 +14,7 @@ class DetailInfoTest(myunit.MyTest):
         return self.driver
 
     def test_login_customermiss(self):
-        url = 'https://test.xliane.com/html3/webapp/fast-issue-con/process_one.html'
+        url = 'https://test.xliane.com/html/webapp/fast-issue-con/process_one.html'
         self.process_first_page("测试书记", "512236197807102659", "15765484677", url)
         ## assert
         detail_info_label = self.driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/label')

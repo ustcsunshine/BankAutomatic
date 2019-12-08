@@ -78,6 +78,12 @@ class Login(Page):
 
 
 
+    # 输入电子邮箱
+    def e_mail(self, email, login_email_loc):
+        self.find_element(*login_email_loc).send_keys(email)
+
+
+
     #部门名称
     def department_name(self, departname, department_name_loc):
         self.find_element(*department_name_loc).send_keys(departname)
@@ -105,6 +111,14 @@ class Login(Page):
     #年收入
     def annual_salary(self, salary, annual_salary_loc):
         self.find_element(*annual_salary_loc).send_keys(salary)
+
+
+
+    #贷款金额
+    def bank_loan(self, loan, bank_loan_loc):
+        self.find_element(*bank_loan_loc).send_keys(loan)
+
+
 
 
     #婚姻状况
