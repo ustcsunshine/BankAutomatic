@@ -6,10 +6,10 @@ from selenium.webdriver.support.select import Select
 
 
 
-class CarPaymentBasicInfo(Login):
+class CarPaymentPersonalInfo(Login):
 
 
-    def car_payment_basic_info(self, company, salary, url):
+    def car_payment_personal_info(self, company, salary, url):
         res = self.open(url)
         if res is None:
             print('Please input right url')
@@ -24,9 +24,9 @@ class CarPaymentBasicInfo(Login):
         sleep(1)
         self.login_button((By.XPATH, '/html/body/div[4]/div/div[1]/div/a'))
         sleep(1)
-        self.annual_salary(salary, (By.XPATH, '/html/body/div[3]'))
+        self.annual_salary(salary, (By.XPATH, '//*[@id="salary"]'))
         sleep(1)
-        self.login_button((By.XPATH, '//*[@id="mid"]/div[5]/div[2]/label[2]')) # /html/body/div[5]/div/div[1]/div
+        self.login_button((By.XPATH, '//*[@id="mid"]/div[5]/div[2]/label[2]'))
         # sleep(2)
         sleep(1)
         self.login_button((By.XPATH, '//*[@id="mid"]/div[7]/div[2]/label[2]'))
@@ -35,6 +35,6 @@ class CarPaymentBasicInfo(Login):
 
         self.login_button((By.XPATH, '//*[@id="bt"]'))
         sleep(1)
-        
+
 
 
