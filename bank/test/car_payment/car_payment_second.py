@@ -5,15 +5,17 @@ from time import sleep
 from selenium.webdriver.support.select import Select
 
 
-
 class CarPaymentPersonalInfo(Login):
-
 
     def car_payment_personal_info(self, company, salary, url):
         res = self.open(url)
         if res is None:
             print('Please input right url')
             return
+        self.personal_info(company, salary)
+
+    def personal_info(self, company, salary):
+        sleep(1)
         self.login_company(company, (By.XPATH, '//input[@placeholder="请输入工作单位名称"]'))
         sleep(1)
         self.login_button((By.XPATH, '//*[@id="industryPicker"]'))
@@ -35,6 +37,3 @@ class CarPaymentPersonalInfo(Login):
 
         self.login_button((By.XPATH, '//*[@id="bt"]'))
         sleep(1)
-
-
-
