@@ -19,6 +19,16 @@ class Login(Page):
     # login_sms_loc = (By.XPATH, '//div[@id="smscode"]')
     login_org_loc = (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]')
 
+    sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')  # 推荐客户错误提示弹框定位
+    fast_identity_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[3]/p ')  # 卡号进度申请查询错误提示弹框定位
+    fast_phone_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[3]/p')  # 卡号进度申请查询错误提示弹框定位
+    user_login_success_loc = (By.XPATH, '//*[@id="app"]/div/img')
+    mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')  # 合作方代码错误提示
+    present_login_success_loc = (By.XPATH, '//*[@id="app"]/div/p[1]')
+
+    # interact_code_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input')  # 交互式二维码的推广人代码
+
+    #
     # login_button_loc = (By.XPATH, '//div[@class="reviseBtn"]/p')
 
     # 登陆用户名
@@ -49,7 +59,6 @@ class Login(Page):
     def login_button(self, login_button_loc):
         self.find_element(*login_button_loc).click()
 
-
     # 立即申请按钮
     def apply_button(self, apply_button_loc):
         self.find_element(*apply_button_loc).click()
@@ -58,78 +67,54 @@ class Login(Page):
     def agree_button(self, agree_button_loc):
         self.find_element(*agree_button_loc).click()
 
-
-
     # 输入单位名称
     def login_company(self, company, login_company_loc):
         self.find_element(*login_company_loc).send_keys(company)
-
-
 
     # 输入区号
     def area_code(self, area, area_code_loc):
         self.find_element(*area_code_loc).send_keys(area)
 
-
     # 输入区号后面的单位号码
     def fixed_phone(self, line, fixed_phone_loc):
         self.find_element(*fixed_phone_loc).send_keys(line)
-
-
-
 
     # 输入电子邮箱
     def e_mail(self, email, login_email_loc):
         self.find_element(*login_email_loc).send_keys(email)
 
-
-
-    #部门名称
+    # 部门名称
     def department_name(self, departname, department_name_loc):
         self.find_element(*department_name_loc).send_keys(departname)
 
-
-
-
-
-
-
-
-    #单位地址
+    # 单位地址
     def department_addr(self, departaddr, department_addr_loc):
         self.find_element(*department_addr_loc).send_keys(departaddr)
 
-
-
-
-    #家庭地址
+    # 家庭地址
     def home_addr(self, homeaddr, home_addr_loc):
         self.find_element(*home_addr_loc).send_keys(homeaddr)
 
-
-
-    #年收入
+    # 年收入
     def annual_salary(self, salary, annual_salary_loc):
         self.find_element(*annual_salary_loc).send_keys(salary)
 
-
-
-    #贷款金额
+    # 贷款金额
     def bank_loan(self, loan, bank_loan_loc):
         self.find_element(*bank_loan_loc).send_keys(loan)
 
-
-
-
-    #婚姻状况
-    def marry_status(self,marry_status_loc ):
+    # 婚姻状况
+    def marry_status(self, marry_status_loc):
         self.find_element(*marry_status_loc).click()
 
-    #学历状况
-    def educational_status(self,educational_loc):
+    # 学历状况
+    def educational_status(self, educational_loc):
         self.find_element(*educational_loc).click()
 
-
+    #
+    # 交互式二维码输入推广人代码
+    def code(self, code, code_loc):
+        self.find_element(*code_loc).send_keys(code)
 
     # 定义统一登陆接口
     def user_login(self, username, phone, url, number):
@@ -205,7 +190,6 @@ class Login(Page):
         self.login_button((By.XPATH, '//p[@class="com"]'))
         sleep(2)
 
-
     def fast_progress(self, identity, url):
 
         res = self.open(url)
@@ -234,20 +218,20 @@ class Login(Page):
         sleep(2)
         self.login_button((By.XPATH, '//p[@class="com"]'))
 
-
-    def t_code(self, phone, url):
+    def t_code(self, phone, code, url):
         res = self.open(url)
         if res is None:
             print('Please input right url')
             return
-        self.login_phone(phone, (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input'))
-        sleep(1)
-        self.login_sms((By.XPATH, '//div[@id="smscode"]'))
-        sleep(1)
-        self.login_button((By.XPATH, '//p[@class="com"]'))
+        self.code(code, (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input'))
 
+        self.login_phone(phone, (By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[2]/input'))
+        sleep(2)
+        self.login_sms((By.XPATH, '//*[@id="smscode"]'))
+        sleep(1)
+        self.login_button((By.XPATH, '//*[@id="app"]/div/div[1]'))
 
-    def apply_card(self, username,identity, phone, url):
+    def apply_card(self, username, identity, phone, url):
         res = self.open(url)
         if res is None:
             print('Please input right url')
@@ -268,19 +252,26 @@ class Login(Page):
         sleep(1)
         self.login_button((By.XPATH, '//*[@id="next"]'))
 
-
-    sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')
-    # pawd_error_hint_loc=(By.XPATH,"//ng-tip/div")
-    user_login_success_loc = (By.XPATH, '//*[@id="app"]/div/img')
-
     # 用户名错误提示
     def pawd_error_hint(self):
         return self.find_element(*self.sms_error_hint_loc).text
 
-    # 验证码错误提示
+    # 客户推荐验证码错误提示
     def pwd_error_hint(self):
         return self.find_element(*self.sms_error_hint_loc).text
 
-    # 等了成功用户名
+    # 登陆成功用户名
     def user_login_success(self):
         return self.find_element(*self.user_login_success_loc).text
+
+    # 身份证错误提示
+    def identity_error_hint(self):
+        return self.find_element(*self.fast_identity_error_hint_loc).text
+
+    # 手机错误提示
+    def phone_error_hint(self):
+        return self.find_element(*self.fast_phone_error_hint_loc).text
+
+    #  合作方错误提示
+    def org_error_hint(self):
+        return self.find_element(*self.mgm_login_loc).text

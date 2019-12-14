@@ -15,6 +15,7 @@ class CarPaymentApplyInfo(Login):
         self.apply_info(phone)
 
     def apply_info(self, phone):
+        sleep(1)
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输手机号码"]'))
         self.login_sms((By.XPATH, '//*[@id="blue"]'))
         sleep(2)

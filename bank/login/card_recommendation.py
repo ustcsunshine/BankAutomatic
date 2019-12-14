@@ -24,7 +24,7 @@ class CardRecommendationTest(myunit.MyTest):
         sleep(1)
 
     def test_login_nullname(self):
-        # 用户名、手机号正确
+        # 用户名为空
         url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
         self.user_login_verify("", "17621523737", url, 1001)
         po = Login(self.driver)
@@ -35,7 +35,7 @@ class CardRecommendationTest(myunit.MyTest):
         sleep(1)
 
     def test_login_englishname(self):
-        # 用户名不正确，手机号码正常
+        # 用户名为英文
         url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index'
         self.user_login_verify("jingj", "17621523730", url, 1001)
         po = Login(self.driver)
@@ -71,3 +71,4 @@ class CardRecommendationTest(myunit.MyTest):
         function.insert_img(self.driver, "user_numb_english5.png")
         print('手机不正确，不是数字')
         sleep(1)
+

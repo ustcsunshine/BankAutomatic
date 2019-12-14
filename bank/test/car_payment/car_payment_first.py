@@ -22,7 +22,7 @@ class CarPaymentBasicInfo(Login):
         sleep(1)
         self.login_button((By.XPATH, '//*[@id="domicileaddress1"]'))
         sleep(1)
-        self.login_button((By.XPATH, '/html/body/div[5]/div/div[1]/div/a'))  # /html/body/div[5]/div/div[1]/div
+        self.login_button((By.XPATH, '/html/body/div[5]/div/div[1]/div/a'))
         # sleep(2)
         self.annual_salary(salary, (By.XPATH, '//input[@placeholder="请输入车辆价格"]'))
         sleep(1)

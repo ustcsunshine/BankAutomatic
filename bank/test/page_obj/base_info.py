@@ -4,16 +4,18 @@ from bank.login.login import Login
 from time import sleep
 
 
-
-
 class BaseInfo(Login):
 
-
-    def base_info(self, username,identity, phone, url):
+    def fast_base_info(self, username, identity, phone, url):
         res = self.open(url)
         if res is None:
             print('Please input right url')
             return
+        self.base_info(username, identity, phone)
+
+    def base_info(self, username, identity, phone):
+        sleep(2)
+        self.login_button((By.XPATH, '//*[@id="shenqing"]'))
 
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入身份证上的姓名"]'))
         sleep(1)

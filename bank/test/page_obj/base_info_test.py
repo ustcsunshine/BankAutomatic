@@ -5,12 +5,12 @@ from bank.test.page_obj.base_info import BaseInfo
 from time import sleep
 
 
-class DetailInfoTest(myunit.MyTest):
+class BasicInfoTest(myunit.MyTest):
 
     # 测试用户登陆
     def process_first_page(self, username, identity, phone, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
-        BaseInfo(self.driver).base_info(username, identity, phone, url)
+        BaseInfo(self.driver).fast_base_info(username, identity, phone, url)
         return self.driver
 
     def test_login_customermiss(self):

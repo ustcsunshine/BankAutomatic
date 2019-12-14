@@ -7,14 +7,11 @@ from time import sleep
 class InteractPlusTest(myunit.MyTest):
 
     # 测试用户登陆
-    def plus_login_verify(self, phone, url):
+    def plus_login_verify(self, phone, code, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
-        Login(self.driver).t_code(phone, url)
+        Login(self.driver).t_code(phone, code, url)
 
-    def test_login_plusmiss(self):
-        '''推荐结果登陆'''
+    # 交互式二维码正常登陆
+    def test_interact_plus(self):
         url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/interactPlus0/index'
-        self.plus_login_verify('12000000000', url)
-        Login(self.driver)
-
-        sleep(3)
+        self.plus_login_verify('12345698755', 4484040029, url)

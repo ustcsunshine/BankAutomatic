@@ -15,7 +15,7 @@ class CarPaymentPersonalInfo(Login):
         self.personal_info(company, salary)
 
     def personal_info(self, company, salary):
-        sleep(1)
+        sleep(2)
         self.login_company(company, (By.XPATH, '//input[@placeholder="请输入工作单位名称"]'))
         sleep(1)
         self.login_button((By.XPATH, '//*[@id="industryPicker"]'))
