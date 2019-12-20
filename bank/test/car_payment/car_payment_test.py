@@ -8,10 +8,10 @@ class CarPaymentTest(myunit.MyTest):
 
     def test_car_payment(self):
         url = 'https://test.xliane.com/html2/car-instalment3/index.html'
-        CarPaymentBasicInfo(self.driver).car_payment_basic_info("李个", "512236197807102659", "110", "10", url)
+        CarPaymentBasicInfo(self.driver).car_payment_basic_info("李个一", "110101198701048327", "110", "10", url)
 
-        CarPaymentPersonalInfo(self.driver).personal_info("上海科技馆", 110)
+        CarPaymentPersonalInfo(self.driver).personal_info("上海科技馆有限公司", 110)
 
-        CarPaymentApplyInfo(self.driver).apply_info('17621523736')
+        CarPaymentApplyInfo(self.driver).apply_info('17621523735')
 
 

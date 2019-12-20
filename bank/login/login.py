@@ -25,10 +25,12 @@ class Login(Page):
     user_login_success_loc = (By.XPATH, '//*[@id="app"]/div/img')
     mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')  # 合作方代码错误提示
     present_login_success_loc = (By.XPATH, '//*[@id="app"]/div/p[1]')
+    interact_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[3]/div/p[2]')  # 交互式二维码的无权限弹框
 
+    # recommend_button_loc = (By.XPATH, '//*[@id="app"]/div/div[2]/a[1]')
     # interact_code_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input')  # 交互式二维码的推广人代码
 
-    #
+    # //*[@id="app"]/div/div[2]/a[1]
     # login_button_loc = (By.XPATH, '//div[@class="reviseBtn"]/p')
 
     # 登陆用户名
@@ -116,14 +118,23 @@ class Login(Page):
     def code(self, code, code_loc):
         self.find_element(*code_loc).send_keys(code)
 
-    # 定义统一登陆接口
-    def user_login(self, username, phone, url, number):
-        # self.open()
+    # 推荐按钮
+    def recommend_button(self, recommend_button_loc):
+        self.find_element(*recommend_button_loc).click()
+
+    # 客户推荐界面的推荐攻
+    def click_login(self, url):
         res = self.open(url)
         if res is None:
             print('Please input right index')
             return
-        # self.bbs_login()
+
+    # 定义统一登陆接口
+    def user_login(self, username, phone, url, number):
+        res = self.open(url)
+        if res is None:
+            print('Please input right index')
+            return
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
         self.login_org(number, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
@@ -228,8 +239,16 @@ class Login(Page):
         self.login_phone(phone, (By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[2]/input'))
         sleep(2)
         self.login_sms((By.XPATH, '//*[@id="smscode"]'))
-        sleep(1)
-        self.login_button((By.XPATH, '//*[@id="app"]/div/div[1]'))
+        sleep(3)
+        mission = self.driver.find_element_by_xpath('//*[@id="app"]/div/div[3]/div/p[2]').text
+        if mission == '无权查询':
+            # self.login_button((By.XPATH, '//*[@id="app"]/div/div[3]/div/span'))
+            pass
+            sleep(1)
+        else:
+            self.login_button((By.XPATH, '//*[@id="app"]/div/div[1]'))
+
+        sleep(2)
 
     def apply_card(self, username, identity, phone, url):
         res = self.open(url)
@@ -275,3 +294,7 @@ class Login(Page):
     #  合作方错误提示
     def org_error_hint(self):
         return self.find_element(*self.mgm_login_loc).text
+
+    #  交互式二维码错误提示
+    def interact_error_hint(self):
+        return self.find_element(*self.interact_error_hint_loc).text

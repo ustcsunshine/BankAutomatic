@@ -4,7 +4,6 @@ from bank.test.car_payment.car_payment_three import CarPaymentApplyInfo
 
 from time import sleep
 
-from bank.test.page_obj.base_info_test import DetailInfoTest
 from bank.test.page_obj.base_info import BaseInfo
 
 class CarPaymentApplyTest(myunit.MyTest):
