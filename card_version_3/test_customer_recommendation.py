@@ -2,7 +2,7 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from login.login import Login
+from web.element_operator import ElementOperator
 from model import unit_init
 from utils.url import CardUrl
 
@@ -10,13 +10,13 @@ from utils.url import CardUrl
 class CustomerRecommendationTest(unit_init.Base):
 
     def login_verify(self, url):
-        Login(self.driver).click_login(url)
+        ElementOperator(self.driver).click_login(url)
         sleep(1)
 
     # 客户推荐界面推荐攻略
     def test_click_custom_recommend(self):
         self.login_verify(CardUrl.COSTOMER_RECOMMENDATION)
-        Login(self.driver).recommend_button((By.XPATH, '//*[@id="app"]/div/div[2]/a[1]'))
+        ElementOperator(self.driver).click((By.XPATH, '//*[@id="app"]/div/div[2]/a[1]'))
         sleep(2)
         message = self.driver.find_element_by_xpath('/html/body/div/div[1]').text
         self.assertIn(u'客户参与活动，推荐达标后即可自动领取奖品', message)
@@ -24,7 +24,7 @@ class CustomerRecommendationTest(unit_init.Base):
     # 客户推荐界面的推荐结果查询
     def test_click_result_recommend(self):
         self.login_verify(CardUrl.COSTOMER_RECOMMENDATION)
-        Login(self.driver).recommend_button((By.XPATH, '//*[@id="app"]/div/div[2]/a[2]'))
+        ElementOperator(self.driver).click((By.XPATH, '//*[@id="app"]/div/div[2]/a[2]'))
         sleep(2)
         message = self.driver.find_element_by_xpath('//*[@id="app"]/div/div[1]').text
         self.assertIn(u'推荐结果查询', message)
@@ -32,7 +32,7 @@ class CustomerRecommendationTest(unit_init.Base):
     # 客户推荐界面的领奖攻略
     def test_click_method_recommend(self):
         self.login_verify(CardUrl.COSTOMER_RECOMMENDATION)
-        Login(self.driver).recommend_button((By.XPATH, '//*[@id="app"]/div/div[2]/a[3]'))
+        ElementOperator(self.driver).click((By.XPATH, '//*[@id="app"]/div/div[2]/a[3]'))
         sleep(2)
         message = self.driver.find_element_by_xpath('/html/body/div/div[1]').text
         self.assertIn(u'礼品太壕，等不及要推荐', message)
@@ -40,7 +40,7 @@ class CustomerRecommendationTest(unit_init.Base):
     # 客户推荐界面的活动条款
     def test_click_contract_recommend(self):
         self.login_verify(CardUrl.COSTOMER_RECOMMENDATION)
-        Login(self.driver).recommend_button((By.XPATH, '//*[@id="app"]/div/a'))
+        ElementOperator(self.driver).click((By.XPATH, '//*[@id="app"]/div/a'))
         sleep(2)
         message = self.driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/p').text
         self.assertIn(u'一、活动时间', message)

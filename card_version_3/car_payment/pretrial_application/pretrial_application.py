@@ -2,10 +2,10 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from login.login import Login
+from web.element_operator import ElementOperator
 
 
-class CarPaymentApplyInfo(Login):
+class CarPaymentApplyInfo(ElementOperator):
 
     def car_payment_apply_info(self, phone, url):
         res = self.open(url)
@@ -16,13 +16,13 @@ class CarPaymentApplyInfo(Login):
 
     def apply_info(self, phone):
         sleep(1)
-        self.login_phone(phone, (By.XPATH, '//input[@placeholder="请输手机号码"]'))
-        self.login_sms((By.XPATH, '//*[@id="blue"]'))
+        self.send_keys(phone, (By.XPATH, '//input[@placeholder="请输手机号码"]'))
+        self.click((By.XPATH, '//*[@id="blue"]'))
         sleep(2)
         code = self.driver.find_element_by_xpath('//*[@id="smscode"]')
         print('code: ' + code.text)
         sleep(1)
-        self.fill_login_sms((By.XPATH, '//*[@id="code"]'), code.text)
+        self.send_keys((By.XPATH, '//*[@id="code"]'), code.text)
         sleep(1)
-        self.login_button((By.XPATH, '//*[@id="bt"]'))
+        self.click((By.XPATH, '//*[@id="bt"]'))
         sleep(2)

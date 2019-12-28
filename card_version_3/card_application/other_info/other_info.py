@@ -1,12 +1,11 @@
-from selenium.webdriver.common.by import By
-from login.login import Login
 from time import sleep
 
+from selenium.webdriver.common.by import By
+
+from web.element_operator import ElementOperator
 
 
-
-class OtherInfo(Login):
-
+class CardApplicationOtherInfo(ElementOperator):
 
     def fast_other_info(self, username, phone, email, url):
         res = self.open(url)
@@ -15,21 +14,19 @@ class OtherInfo(Login):
             return
         self.other_info(username, phone, email)
 
-
-
     def other_info(self, username, phone, email):
         sleep(2)
-        self.login_username(username, (By.XPATH, '//input[@placeholder="请输入亲属的姓名"]'))
+        self.send_keys(username, (By.XPATH, '//input[@placeholder="请输入亲属的姓名"]'))
         sleep(1)
-        self.login_button((By.XPATH, '//*[@id="relation_A"]/span'))
+        self.click((By.XPATH, '//*[@id="relation_A"]/span'))
         sleep(1)
-        self.login_phone(phone, (By.XPATH, '//*[@id="relativetel"]'))
+        self.send_keys(phone, (By.XPATH, '//*[@id="relativetel"]'))
         sleep(2)
-        self.e_mail(email,(By.XPATH, '//*[@id="e_mail"]'))
+        self.send_keys(email, (By.XPATH, '//*[@id="e_mail"]'))
         sleep(1)
-        self.login_button((By.XPATH, '//*[@id="sendaddress_B"]/span'))
+        self.click((By.XPATH, '//*[@id="sendaddress_B"]/span'))
 
         sleep(2)
-        self.login_button((By.XPATH, '//*[@id="next"]'))
+        self.click((By.XPATH, '//*[@id="next"]'))
         sleep(3)
         print("-----")

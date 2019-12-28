@@ -2,7 +2,7 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from login.login import Login
+from web.element_operator import ElementOperator
 from model import unit_init
 from utils.url import CardUrl
 
@@ -10,7 +10,7 @@ from utils.url import CardUrl
 class MgmGiftDeliveryTest(unit_init.Base):
 
     def login_verify(self, url):
-        Login(self.driver).gift_distribute('13000000000', url)
+        ElementOperator(self.driver).gift_distribute('13000000000', url)
         sleep(1)
 
     # mgm选择卡种按钮
@@ -21,7 +21,7 @@ class MgmGiftDeliveryTest(unit_init.Base):
         text = self.driver.find_element_by_xpath('//*[@id="app"]/div/ul/li[1]/div/div[2]/input').text
         print(text)
         if len(text) == 0:
-            Login(self.driver).login_sms((By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input'))
+            ElementOperator(self.driver).click((By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input'))
             sleep(2)
         else:
             self.assertIn(u'李白1 ', text)

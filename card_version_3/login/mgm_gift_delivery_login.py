@@ -1,7 +1,7 @@
 import sys
 from time import sleep
 
-from login.login import Login
+from web.element_operator import ElementOperator
 from model import unit_init
 from utils.url import CardUrl
 
@@ -13,7 +13,7 @@ class MgmGiftDeliveryLoginTest(unit_init.Base):
 
     # 测试用户登陆
     def login_verify(self, phone, url):
-        Login(self.driver).gift_distribute(phone, url)
+        ElementOperator(self.driver).gift_distribute(phone, url)
 
     def test_login_normal(self):
         '''正常登陆礼品配送登陆'''
@@ -29,7 +29,7 @@ class MgmGiftDeliveryLoginTest(unit_init.Base):
         '''手机号少一位'''
         self.login_verify("1326257610", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
-        po = Login(self.driver)
+        po = ElementOperator(self.driver)
         sleep(1)
         self.assertIn("手机号输入有误", po.identity_error_hint())
         sleep(1)
@@ -41,7 +41,7 @@ class MgmGiftDeliveryLoginTest(unit_init.Base):
         '''手机号不合法'''
         self.login_verify("1326257610m", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
-        po = Login(self.driver)
+        po = ElementOperator(self.driver)
         sleep(1)
         self.assertIn("手机号输入有误", po.identity_error_hint())
         sleep(1)
@@ -51,7 +51,7 @@ class MgmGiftDeliveryLoginTest(unit_init.Base):
         '''手机号为空'''
         self.login_verify("", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
-        po = Login(self.driver)
+        po = ElementOperator(self.driver)
         sleep(1)
         self.assertIn("手机号不能为空", po.identity_error_hint())
         sleep(1)
