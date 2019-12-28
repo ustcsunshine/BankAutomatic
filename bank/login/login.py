@@ -130,18 +130,20 @@ class Login(Page):
             return
 
     # 定义统一登陆接口
-    def user_login(self, username, phone, url, number):
+    def user_login(self, username, phone, url, org=''):
         res = self.open(url)
         if res is None:
             print('Please input right index')
             return
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
-        self.login_org(number, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
+        self.login_org(org, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
         self.login_sms((By.XPATH, '//div[@id="smscode"]'))
         sleep(3)
+        self.driver.find_element_by_xpath('//*[@id="app"]/div/label').click()
         self.login_button((By.XPATH, '//div[@class="reviseBtn"]/p'))
         sleep(3)
+
 
     def login_recommendation(self, phone, url):
         res = self.open(url)
