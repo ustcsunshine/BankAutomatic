@@ -1,19 +1,21 @@
-from login.login import Login
-from models import myunit
-from selenium.webdriver.common.by import By
 from time import sleep
 
+from selenium.webdriver.common.by import By
 
-class MgmSendTest(myunit.MyTest):
+from login.login import Login
+from model import unit_init
+from utils.url import CardUrl
 
-    def send_login_verify(self, url):
+
+class MgmGiftDeliveryTest(unit_init.Base):
+
+    def login_verify(self, url):
         Login(self.driver).gift_distribute('13000000000', url)
         sleep(1)
 
     # mgm选择卡种按钮
-    def test_send_prsent(self):
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
-        self.send_login_verify(url)
+    def test_send_present(self):
+        self.login_verify(CardUrl.MGM_GIFT_DELIVERY)
         print("888")
         sleep(2)
         text = self.driver.find_element_by_xpath('//*[@id="app"]/div/ul/li[1]/div/div[2]/input').text
@@ -23,4 +25,3 @@ class MgmSendTest(myunit.MyTest):
             sleep(2)
         else:
             self.assertIn(u'李白1 ', text)
-

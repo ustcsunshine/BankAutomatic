@@ -1,8 +1,8 @@
 from card_version_3.card_application.other_info.other_info import OtherInfo
-from models import myunit
+from model import unit_init
 
 
-class OtherInfoTest(myunit.MyTest):
+class OtherInfoTest(unit_init.Base):
 
     def other_login_verify(self, username, phone, email, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'

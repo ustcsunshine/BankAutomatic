@@ -1,8 +1,8 @@
 from card_version_3.card_application.detail_info.detail_info import DetailInfo
-from models import myunit
+from model import unit_init
 
 
-class DetailInfoTest(myunit.MyTest):
+class DetailInfoTest(unit_init.Base):
 
     # def process_first_page(self, username, identity, phone, url):
     #     # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'

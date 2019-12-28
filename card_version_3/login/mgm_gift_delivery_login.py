@@ -1,24 +1,23 @@
-from models import myunit
-from login.login import Login
-
-from time import sleep
 import sys
+from time import sleep
 
+from login.login import Login
+from model import unit_init
+from utils.url import CardUrl
 
-sys.path.append("./models")
+sys.path.append("./model")
 sys.path.append("./card_application")
 
 
-class GiftDistributeTest(myunit.MyTest):
+class MgmGiftDeliveryLoginTest(unit_init.Base):
 
     # 测试用户登陆
-    def user_login_verify(self, phone, url):
+    def login_verify(self, phone, url):
         Login(self.driver).gift_distribute(phone, url)
 
     def test_login_normal(self):
         '''正常登陆礼品配送登陆'''
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
-        self.user_login_verify( "13262576101", url)
+        self.login_verify("13262576101", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         message = self.driver.find_element_by_xpath('//*[@id="app"]/div/p[1]').text
         print(message)
         sleep(2)
@@ -28,8 +27,7 @@ class GiftDistributeTest(myunit.MyTest):
 
     def test_login_phone_miss(self):
         '''手机号少一位'''
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
-        self.user_login_verify( "1326257610", url)
+        self.login_verify("1326257610", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
         po = Login(self.driver)
         sleep(1)
@@ -41,8 +39,7 @@ class GiftDistributeTest(myunit.MyTest):
 
     def test_login_phone_english(self):
         '''手机号不合法'''
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
-        self.user_login_verify( "1326257610m", url)
+        self.login_verify("1326257610m", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
         po = Login(self.driver)
         sleep(1)
@@ -52,8 +49,7 @@ class GiftDistributeTest(myunit.MyTest):
 
     def test_login_phone_null(self):
         '''手机号为空'''
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
-        self.user_login_verify( "", url)
+        self.login_verify("", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         sleep(1)
         po = Login(self.driver)
         sleep(1)

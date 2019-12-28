@@ -1,21 +1,18 @@
-from models import myunit
-from login.login import Login
-
 from time import sleep
 
+from login.login import Login
+from model import unit_init
+from utils.url import CardUrl
 
-class FastProgressTest(myunit.MyTest):
+
+class CardProcessQueryLoginTest(unit_init.Base):
 
     # 测试用户登陆
-    def fast_login_verify(self, identity, url):
-        # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
-        #
+    def login_verify(self, identity, url):
         Login(self.driver).fast_progress(identity, url)
 
-    def test_login_identitymiss(self):
+    def test_login_identity_miss(self):
         '''推荐结果登陆'''
-        url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/fastProgress/index'
-        self.fast_login_verify("512236197807102659",  url)
+        self.login_verify("512236197807102659", CardUrl.CARD_PROCESS_QUERY_LOGIN_URL)
         Login(self.driver)
-
-        sleep(3)
+        sleep(2)

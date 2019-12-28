@@ -1,11 +1,11 @@
 from card_version_3.card_application.basic_info.basic_info import BasicInfo
-from models import myunit
+from model import unit_init
 import unittest
 
 from time import sleep
 
 
-class BasicInfoTest(myunit.MyTest):
+class BasicInfoTest(unit_init.Base):
 
     def process_first_page(self, username, identity, phone, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'

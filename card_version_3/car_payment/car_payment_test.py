@@ -1,10 +1,10 @@
 from card_version_3.car_payment.basic_info.basic_info import CarPaymentBasicInfo
 from card_version_3.car_payment.personal_info.personal_info import CarPaymentPersonalInfo
 from card_version_3.car_payment.pretrial_application.pretrial_application import CarPaymentApplyInfo
-from models import myunit
+from model import unit_init
 
 
-class CarPaymentTest(myunit.MyTest):
+class CarPaymentTest(unit_init.Base):
 
     def test_car_payment(self):
         url = 'https://test.xliane.com/html2/car-instalment3/index.html'

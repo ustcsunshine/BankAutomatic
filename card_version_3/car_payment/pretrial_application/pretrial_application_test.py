@@ -1,8 +1,8 @@
 from card_version_3.car_payment.pretrial_application.pretrial_application import CarPaymentApplyInfo
-from models import myunit
+from model import unit_init
 
 
-class CarPaymentApplyTest(myunit.MyTest):
+class CarPaymentApplyTest(unit_init.Base):
 
     def car_payment_apply_page(self, phone, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'

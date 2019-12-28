@@ -1,22 +1,12 @@
-from selenium.webdriver.common.by import By
-from utils.base import Page
 from time import sleep
 
+from selenium.webdriver.common.by import By
 
-class Login(Page):
+from model.page_operator import BasePageOperator
+
+
+class Login(BasePageOperator):
     url = '/'
-
-    # bbs_login_user_loc=(By.XPATH,"//div[@id='mzCust']/div/img")
-    # bbs_login_button_loc =(By.ID,"mzLogin")
-    #
-    # def bbs_login(self):
-    #     self.find_element(*self.bbs_login_user_loc).click()
-    #     sleep(1)
-    #     self.find_element(*self.bbs_login_button_loc).click()
-
-    # login_username_loc = (By.XPATH, '//input[@placeholder="请输入您的姓名"]')
-    # login_phone_loc = (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]')
-    # login_sms_loc = (By.XPATH, '//div[@id="smscode"]')
     login_org_loc = (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]')
 
     sms_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[5]/div/p[2]')  # 推荐客户错误提示弹框定位
@@ -26,12 +16,6 @@ class Login(Page):
     mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')  # 合作方代码错误提示
     present_login_success_loc = (By.XPATH, '//*[@id="app"]/div/p[1]')
     interact_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[3]/div/p[2]')  # 交互式二维码的无权限弹框
-
-    # recommend_button_loc = (By.XPATH, '//*[@id="app"]/div/div[2]/a[1]')
-    # interact_code_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[2]/input')  # 交互式二维码的推广人代码
-
-    # //*[@id="app"]/div/div[2]/a[1]
-    # login_button_loc = (By.XPATH, '//div[@class="reviseBtn"]/p')
 
     # 登陆用户名
     def login_username(self, username, login_username_loc):
@@ -137,13 +121,13 @@ class Login(Page):
             return
         self.login_username(username, (By.XPATH, '//input[@placeholder="请输入您的姓名"]'))
         self.login_phone(phone, (By.XPATH, '//input[@placeholder="推荐人获奖短信接收号码"]'))
-        self.login_org(org, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
+        if org != '':
+            self.login_org(org, (By.XPATH, '//input[@placeholder="非必填，仅供本行行员使用"]'))
         self.login_sms((By.XPATH, '//div[@id="smscode"]'))
         sleep(3)
         self.driver.find_element_by_xpath('//*[@id="app"]/div/label').click()
         self.login_button((By.XPATH, '//div[@class="reviseBtn"]/p'))
         sleep(3)
-
 
     def login_recommendation(self, phone, url):
         res = self.open(url)

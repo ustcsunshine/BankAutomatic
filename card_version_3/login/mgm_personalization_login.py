@@ -1,14 +1,14 @@
-from models import myunit
-from login.login import Login
-
-from time import sleep
 import sys
+from time import sleep
 
-sys.path.append("./models")
+from login.login import Login
+from model import unit_init
+
+sys.path.append("./model")
 sys.path.append("./card_application")
 
 
-class MgmRecommendationTest(myunit.MyTest):
+class MgmPersonalizationLoginTest(unit_init.Base):
 
     # 测试用户登陆
     def mgm_login_verify(self, phone, username, url, org):

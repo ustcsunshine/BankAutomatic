@@ -1,8 +1,8 @@
 from card_version_3.car_payment.basic_info.basic_info import CarPaymentBasicInfo
-from models import myunit
+from model import unit_init
 
 
-class CarPaymentFirsTest(myunit.MyTest):
+class CarPaymentFirsTest(unit_init.Base):
 
     def car_payment_first_page(self, username, identity, salary, loan, url):
         # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
