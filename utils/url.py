@@ -11,7 +11,7 @@ class CardUrl:
 
     RECOMMENDATION_RESULT_QUERY_LOGIN_URL = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/recommendResult/index'
 
-    SOURCE_RECOMMENDATION_RESULT_QUERY_LOGIN_URL = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/rootsResult/index'
+    SOURCE_RECOMMENDATION_RESULT_QUERY_LOGIN_URL = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/tplus0/index'
 
     CUSTOMER_RECOMMENDATION = 'https://test.xliane.com/html3/webapp/fastIssue/index.html#/customerRecommend/index'
 

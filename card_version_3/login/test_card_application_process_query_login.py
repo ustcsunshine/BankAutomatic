@@ -11,8 +11,8 @@ class CardProcessQueryLoginTest(unit_init.Base):
     def login(self, identity, url):
         LoginOperator(self.driver).card_process_query_login(identity, url)
 
+    # 申请进度查询
     def test_login_identity_miss(self):
-        '''推荐结果登陆'''
         self.login("512236197807102659", CardUrl.CARD_PROCESS_QUERY_LOGIN_URL)
         LoginOperator(self.driver)
         sleep(2)

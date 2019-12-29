@@ -16,8 +16,8 @@ class RecommendationResultQueryTest(unit_init.Base):
         LoginOperator(self.driver).recommendation_login(phone, url)
 
     # 推荐结果正常登陆
-    def test_login_normal(self):
-        self.login("12000000101", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+    def test_login_success(self):
+        self.login("12000000102", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
 
     # 手机号码少一位
     def test_phone_miss(self):
@@ -34,7 +34,7 @@ class RecommendationResultQueryTest(unit_init.Base):
         self.assertIn("手机号格式不正确", po.phone_format_text())
 
     # 手机号码null
-    def test_phone_ull(self):
+    def test_phone_null(self):
         self.login("", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
         po = LoginOperator(self.driver)
         sleep(1)

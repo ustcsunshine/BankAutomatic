@@ -15,7 +15,7 @@ class CardApplicationBasicInfoTest(unit_init.Base):
 
     # 测试用户正常登陆
     def test_login_customer_miss(self):
-        self.basic_info_page("测试书记", "110101198701045257", "15765484677", CardUrl.CARD_APPLICATION_BASIC_INFO_URL)
+        self.basic_info_page("测试书记", "110101198701045257", "15765484676", CardUrl.CARD_APPLICATION_BASIC_INFO_URL)
         base_info_label = self.driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/label')
         self.assertTrue(base_info_label is not None)
         self.assertEqual(base_info_label.text, '单位名称')

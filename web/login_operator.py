@@ -37,10 +37,9 @@ class LoginOperator(BasePageOperator):
         sleep(2)
         code = self.driver.find_element_by_xpath('//*[@id="app"]/div/div[2]')
         print('code: ' + code.text)
-
-        self.send_keys((By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[2]/input'), code.text)
+        sleep(1)
+        self.send_keys(code.text, (By.XPATH, '//*[@id="app"]/div/ul/li[2]/div/div[2]/input'))
         self.click((By.XPATH, '//button[@class="confirm"]'))
-        sleep(3)
 
     def mgm_recommendation_login(self, phone, username, url, org):
         self.open(url)
@@ -90,7 +89,7 @@ class LoginOperator(BasePageOperator):
         code = self.driver.find_element_by_xpath('//*[@id="app"]/div/ul/div')
         print('code: ' + code.text)
 
-        self.send_keys((By.XPATH, '//input[@placeholder="请输入获取的验证码"]'), code.text)
+        self.send_keys(code.text, (By.XPATH, '//input[@placeholder="请输入获取的验证码"]'))
         sleep(2)
         self.click((By.XPATH, '//p[@class="com"]'))
 

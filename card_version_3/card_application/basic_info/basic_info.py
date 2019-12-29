@@ -25,7 +25,9 @@ class CardApplicationBasicInfo(LoginOperator):
         print('code: ' + code.text)
 
         sleep(1)
-        self.send_keys((By.XPATH, '//*[@id="identifyCode"]'), code.text)
-        sleep(3)
+        self.send_keys(code.text, (By.XPATH, '//*[@id="identifyCode"]'))
+        sleep(1)
+        self.click((By.XPATH, '/html/body/div[8]/img'))
+        sleep(1)
         self.click((By.XPATH, '//*[@id="next"]'))
         sleep(2)

@@ -23,7 +23,7 @@ class MgmPersonalizationLoginTest(unit_init.Base):
         return operator.get_text(phone_error_hint_loc)
 
     def get_org_error_text(self):
-        mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')  # 合作方代码错误提示
+        mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')
         operator = LoginOperator(self.driver)
         return operator.get_text(mgm_login_loc)
 
