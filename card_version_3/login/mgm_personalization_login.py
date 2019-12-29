@@ -16,6 +16,11 @@ class MgmPersonalizationLoginTest(unit_init.Base):
     def login(self, phone, username, url, org):
         LoginOperator(self.driver).mgm_recommendation_login(phone, username, url, org)
 
+    def get_phone_error_text(self):
+        phone_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[1]/div/div[3]/p')
+        operator = LoginOperator(self.driver)
+        return operator.get_text(phone_error_hint_loc)
+
     def get_org_error_text(self):
         mgm_login_loc = (By.XPATH, '//*[@id="app"]/div/ul/li[3]/div/div[3]/p')  # 合作方代码错误提示
         operator = LoginOperator(self.driver)
@@ -32,18 +37,14 @@ class MgmPersonalizationLoginTest(unit_init.Base):
         url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
         self.login("1326257610", "窦路路", url, 1002)
         sleep(1)
-        po = LoginOperator(self.driver)
-        sleep(1)
-        self.assertIn("手机号输入有误", po.phone_format_text())
+        self.assertIn("手机号输入有误", self.get_phone_error_text())
 
     # 手机号为空
     def test_login_phone_null(self):
         url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
         self.login("", "窦路路", url, 1002)
         sleep(1)
-        po = LoginOperator(self.driver)
-        sleep(1)
-        self.assertIn("手机号不能为空", po.phone_format_text())
+        self.assertIn("手机号不能为空", self.get_phone_error_text())
 
     # 合作方代码输入英文
     def test_login_org_english(self):

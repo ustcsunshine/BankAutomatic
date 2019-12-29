@@ -19,7 +19,7 @@ class CustomerRecommendationLoginTest(unit_init.Base):
         operator = LoginOperator(self.driver)
         return operator.get_text(sms_error_hint_loc)
 
-    # 机构是1002的，正常登陆,有机构号1001
+    # 正常登陆,有机构号1001
     def test_login_org_normal(self):
         self.login("李芽", "17000199918", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
         sleep(3)
@@ -28,9 +28,9 @@ class CustomerRecommendationLoginTest(unit_init.Base):
         image_util.insert_img(self.driver, "user_pawd_true1.png")
         sleep(1)
 
-    # 机构是1002的，正常登陆,无机构号
+    # 正常登陆,无机构号
     def test_login_org_null(self):
-        self.login("李芽", "17000199916", CardUrl.CUSTOMER_RECO_LOGIN_URL)
+        self.login("李芽", "17000199917", CardUrl.CUSTOMER_RECO_LOGIN_URL)
         sleep(3)
         message = self.driver.find_element_by_xpath('//p[@id="copyright"]').text
         self.assertIn(u'©本服务由兴业银行信用卡中心提供 v3.6.9', message)
@@ -39,7 +39,7 @@ class CustomerRecommendationLoginTest(unit_init.Base):
 
     # 用户名为空
     def test_login_null_name(self):
-        self.login("", "17621523737", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
+        self.login("", "17621523735", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
         sleep(3)
         self.assertIn("姓名为空或格式不正确", self.get_sms_error_text())
         image_util.insert_img(self.driver, "user_name_miss2.png")
@@ -48,7 +48,7 @@ class CustomerRecommendationLoginTest(unit_init.Base):
 
     # 用户名为英文
     def test_login_english_name(self):
-        self.login("jingj", "17621523730", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
+        self.login("jingj", "17621523731", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
         sleep(2)
         self.assertIn("姓名为空或格式不正确", self.get_sms_error_text())
         image_util.insert_img(self.driver, "user_name_miss3.png")
@@ -65,8 +65,8 @@ class CustomerRecommendationLoginTest(unit_init.Base):
 
     # 手机不正确，不是数字
     def test_login_numb_english(self):
-        self.login("李孝雪", "17621523736", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
+        self.login("李孝雪", "1762152373m", CardUrl.CUSTOMER_RECO_LOGIN_URL, '1001')
         sleep(2)
-        self.assertIn("手机号为空或格式不正确", self.get_sms_error_text())
+        self.assertIn("验证码为空或格式不正确", self.get_sms_error_text())
         image_util.insert_img(self.driver, "user_numb_english5.png")
         print('手机不正确，不是数字')
