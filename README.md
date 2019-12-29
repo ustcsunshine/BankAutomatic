@@ -8,8 +8,8 @@ Therefore we create the project to do automated tests for the bank which can bri
 - Testing Efficiency Improvement: Automated tests eventually take up significantly lesser amount of time. They can be run virtually unattended, leaving the results to be monitored towards the end of the process.
 
 ## Tool
-- Selenium: Selenium WebDriver is one of the most popular tools for Web UI Automation. It allows you to define tests and automatically detect results of these tests on a browser. 
-- Python
+- Selenium WebDriver: Selenium WebDriver is one of the most popular tools for Web UI Automation. It allows you to define tests and automatically detect results of these tests on a browser. 
+- Python 3.7.2
 
 ## Modules
 - [Customer Recommendation](https://test.xliane.com/html2/webapp/fastIssue/index.html#/customerRecommend/index)
@@ -19,5 +19,6 @@ Therefore we create the project to do automated tests for the bank which can bri
 - [Source recommendation result query](https://test.xliane.com/html2/webapp/fastIssue/index.html#/rootsResult/index)
 - [MgmGiftDeliveryTest](https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index)
 
-
+## Next step to do
+- Run unit tests in background silently with Selenium
 
