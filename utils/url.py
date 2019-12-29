@@ -13,7 +13,7 @@ class CardUrl:
 
     SOURCE_RECOMMENDATION_RESULT_QUERY_LOGIN_URL = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/rootsResult/index'
 
-    COSTOMER_RECOMMENDATION = 'https://test.xliane.com/html3/webapp/fastIssue/index.html#/customerRecommend/index'
+    CUSTOMER_RECOMMENDATION = 'https://test.xliane.com/html3/webapp/fastIssue/index.html#/customerRecommend/index'
 
     MGM_GIFT_DELIVERY = 'https://test.xliane.com/html2/webapp/fastIssue/index.html?bz1=0#/giftDistribute/index'
 
