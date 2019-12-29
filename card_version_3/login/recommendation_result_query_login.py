@@ -1,10 +1,9 @@
-from model import unit_init
-from web.element_operator import ElementOperator
-
-from time import sleep
 import sys
+from time import sleep
 
+from model import unit_init
 from utils.url import CardUrl
+from web.login_operator import LoginOperator
 
 sys.path.append("./model")
 sys.path.append("./card_application")
@@ -13,37 +12,37 @@ sys.path.append("./card_application")
 class RecommendationResultQueryTest(unit_init.Base):
 
     # 测试用户登陆
-    def login_verify(self, phone, url):
-        ElementOperator(self.driver).login_recommendation(phone, url)
+    def login(self, phone, url):
+        LoginOperator(self.driver).recommendation_login(phone, url)
 
     # 推荐结果正常登陆
     def test_login_normal(self):
-        self.login_verify("12000000101", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        self.login("12000000101", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
 
     # 手机号码少一位
     def test_phone_miss(self):
-        self.login_verify("1200000010", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
-        po = ElementOperator(self.driver)
+        self.login("1200000010", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.identity_error_hint())
+        self.assertIn("手机号格式不正确", po.phone_format_text())
 
     # 手机号码有英文
     def test_phone_english(self):
-        self.login_verify("120000001m", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
-        po = ElementOperator(self.driver)
+        self.login("120000001m", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.identity_error_hint())
+        self.assertIn("手机号格式不正确", po.phone_format_text())
 
     # 手机号码null
     def test_phone_ull(self):
-        self.login_verify("", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
-        po = ElementOperator(self.driver)
+        self.login("", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号码不能为空", po.identity_error_hint())
+        self.assertIn("手机号码不能为空", po.phone_format_text())
 
     # 手机号码有空格
-    def test_phone_miss(self):
-        self.login_verify("12345 67676", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
-        po = ElementOperator(self.driver)
+    def test_phone_space(self):
+        self.login("12345 67676", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.identity_error_hint())
+        self.assertIn("手机号格式不正确", po.phone_format_text())

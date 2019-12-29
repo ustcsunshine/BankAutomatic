@@ -6,7 +6,7 @@ from utils.url import CardUrl
 class CarPaymentBasicInfoTest(unit_init.Base):
 
     def car_payment_basic_info_page(self, username, identity, salary, loan, url):
-        CarPaymentBasicInfo(self.driver).car_payment_basic_info(username, identity, salary, loan, url)
+        CarPaymentBasicInfo(self.driver).open_login(username, identity, salary, loan, url)
 
     # 正常输入基本信息页
     def test_car_payment_info(self):

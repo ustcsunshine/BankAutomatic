@@ -5,6 +5,16 @@ class BasePageOperator(object):
         self.timeout = 30
         self.parent = parent
 
+    def send_keys(self, key, key_loc):
+        self.find_element(*key_loc).send_keys(key)
+
+    # 点击验证码
+    def click(self, click_loc):
+        self.find_element(*click_loc).click()
+
+    def get_text(self, loc):
+        return self.find_element(*loc).text
+
     def find_element(self, *loc):
         return self.driver.find_element(*loc)
 

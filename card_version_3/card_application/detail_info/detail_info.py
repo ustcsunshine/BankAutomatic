@@ -2,19 +2,16 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from web.element_operator import ElementOperator
+from web.login_operator import LoginOperator
 
 
-class CardApplicationDetailInfo(ElementOperator):
+class CardApplicationDetailInfo(LoginOperator):
 
-    def fast_detail_info(self, company, area, line, departaddr, departname, salary, homeaddr, url):
-        res = self.open(url)
-        if res is None:
-            print('Please input right url')
-            return
-        self.detail_info(company, area, line, departaddr, departname, salary, homeaddr)
+    def open_login(self, company, area, line, depart_addr, depart_name, salary, home_addr, url):
+        self.open(url)
+        self.login(company, area, line, depart_addr, depart_name, salary, home_addr)
 
-    def detail_info(self, company, area, line, departaddr, departname, salary, homeaddr):
+    def login(self, company, area, line, depart_addr, depart_name, salary, home_addr):
         sleep(2)
         self.send_keys(company, (By.XPATH, '//input[@placeholder="请输入您现单位名称"]'))
 
@@ -22,8 +19,8 @@ class CardApplicationDetailInfo(ElementOperator):
         sleep(1)
         self.send_keys(line, (By.XPATH, '//input[@placeholder="单位电话"]'))
         sleep(1)
-        self.send_keys(departaddr, (By.XPATH, '//input[@placeholder="请输入详细单位地址(22个字内)"]'))
-        self.send_keys(departname, (By.XPATH, '//input[@placeholder="请输入您任职的部门"]'))
+        self.send_keys(depart_addr, (By.XPATH, '//input[@placeholder="请输入详细单位地址(22个字内)"]'))
+        self.send_keys(depart_name, (By.XPATH, '//input[@placeholder="请输入您任职的部门"]'))
         sleep(1)
         self.click((By.XPATH, '//*[@id="workvocation"]'))  # 行业类别旁边的按钮
         sleep(2)
@@ -43,7 +40,7 @@ class CardApplicationDetailInfo(ElementOperator):
         sleep(1)
         self.click((By.XPATH, '//*[@id="education_A"]/span'))
         sleep(1)
-        self.send_keys(homeaddr, (By.XPATH, '//input[@placeholder="请输入详细住宅地址(22个字内)"]'))
+        self.send_keys(home_addr, (By.XPATH, '//input[@placeholder="请输入详细住宅地址(22个字内)"]'))
 
         sleep(1)
         self.click((By.XPATH, '//*[@id="next"]'))

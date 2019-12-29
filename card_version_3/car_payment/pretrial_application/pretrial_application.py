@@ -2,19 +2,16 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from web.element_operator import ElementOperator
+from web.login_operator import LoginOperator
 
 
-class CarPaymentApplyInfo(ElementOperator):
+class CarPaymentApplyInfo(LoginOperator):
 
-    def car_payment_apply_info(self, phone, url):
-        res = self.open(url)
-        if res is None:
-            print('Please input right url')
-            return
-        self.apply_info(phone)
+    def open_login(self, phone, url):
+        self.open(url)
+        self.login(phone)
 
-    def apply_info(self, phone):
+    def login(self, phone):
         sleep(1)
         self.send_keys(phone, (By.XPATH, '//input[@placeholder="请输手机号码"]'))
         self.click((By.XPATH, '//*[@id="blue"]'))

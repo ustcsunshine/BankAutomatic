@@ -6,7 +6,7 @@ from utils.url import CardUrl
 class CarPaymentPersonalInfoTest(unit_init.Base):
 
     def car_payment_personal_info_page(self, company, salary, url):
-        CarPaymentPersonalInfo(self.driver).car_payment_personal_info(company, salary, url)
+        CarPaymentPersonalInfo(self.driver).open_login(company, salary, url)
 
     def test_car_payment_info(self):
         self.car_payment_personal_info_page("上海科技馆", 110, CardUrl.CAR_PAYMENT_PERSONAL_INFO_URL)

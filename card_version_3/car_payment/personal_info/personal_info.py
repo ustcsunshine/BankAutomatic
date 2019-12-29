@@ -1,18 +1,17 @@
-from selenium.webdriver.common.by import By
-from web.element_operator import ElementOperator
 from time import sleep
 
+from selenium.webdriver.common.by import By
 
-class CarPaymentPersonalInfo(ElementOperator):
+from web.login_operator import LoginOperator
 
-    def car_payment_personal_info(self, company, salary, url):
-        res = self.open(url)
-        if res is None:
-            print('Please input right url')
-            return
-        self.personal_info(company, salary)
 
-    def personal_info(self, company, salary):
+class CarPaymentPersonalInfo(LoginOperator):
+
+    def open_login(self, company, salary, url):
+        self.open(url)
+        self.login(company, salary)
+
+    def login(self, company, salary):
         sleep(2)
         self.send_keys(company, (By.XPATH, '//input[@placeholder="请输入工作单位名称"]'))
         sleep(1)

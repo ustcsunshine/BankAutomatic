@@ -1,18 +1,15 @@
 from selenium.webdriver.common.by import By
-from web.element_operator import ElementOperator
+from web.login_operator import LoginOperator
 from time import sleep
 
 
-class CardApplicationBasicInfo(ElementOperator):
+class CardApplicationBasicInfo(LoginOperator):
 
-    def basic_info(self, username, identity, phone, url):
-        res = self.open(url)
-        if res is None:
-            print('Please input right url')
-            return
-        self.base_info(username, identity, phone)
+    def open_login(self, username, identity, phone, url):
+        self.open(url)
+        self.login(username, identity, phone)
 
-    def base_info(self, username, identity, phone):
+    def login(self, username, identity, phone):
         sleep(2)
         self.click((By.XPATH, '//*[@id="shenqing"]'))
 

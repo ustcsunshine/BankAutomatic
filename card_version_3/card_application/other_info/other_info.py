@@ -2,19 +2,16 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from web.element_operator import ElementOperator
+from web.login_operator import LoginOperator
 
 
-class CardApplicationOtherInfo(ElementOperator):
+class CardApplicationOtherInfo(LoginOperator):
 
-    def fast_other_info(self, username, phone, email, url):
-        res = self.open(url)
-        if res is None:
-            print('Please input right url')
-            return
-        self.other_info(username, phone, email)
+    def open_login(self, username, phone, email, url):
+        self.open(url)
+        self.login(username, phone, email)
 
-    def other_info(self, username, phone, email):
+    def login(self, username, phone, email):
         sleep(2)
         self.send_keys(username, (By.XPATH, '//input[@placeholder="请输入亲属的姓名"]'))
         sleep(1)

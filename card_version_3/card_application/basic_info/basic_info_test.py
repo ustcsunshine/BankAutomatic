@@ -10,8 +10,7 @@ from utils.url import CardUrl
 class CardApplicationBasicInfoTest(unit_init.Base):
 
     def basic_info_page(self, username, identity, phone, url):
-        # url = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/mgm/index'
-        CardApplicationBasicInfo(self.driver).basic_info(username, identity, phone, url)
+        CardApplicationBasicInfo(self.driver).open_login(username, identity, phone, url)
         return self.driver
 
     # 测试用户正常登陆
