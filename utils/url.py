@@ -23,6 +23,8 @@ class CardUrl:
 
     SOURCE_RECOMMENDATION_RESULT_QUERY_URL = 'https://test.xliane.com/html2/webapp/fastIssue/index.html#/rootsResult/index'
 
+    CAR_PAYMENT_URL = 'https://test.xliane.com/html2/car-instalment3/index.html'
+
     CAR_PAYMENT_BASIC_INFO_URL = 'https://test.xliane.com/html2/car-instalment3/index.html'
 
     CAR_PAYMENT_PERSONAL_INFO_URL = 'https://test.xliane.com/html2/car-instalment3/second.html'
