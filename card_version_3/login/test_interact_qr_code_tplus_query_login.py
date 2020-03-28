@@ -2,6 +2,7 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
+from utils.phone_util import Phone
 from web.login_operator import LoginOperator
 from model import unit_init
 from utils.url import CardUrl
@@ -49,7 +50,7 @@ class InteractQrCodeTPlusQueryLoginTest(unit_init.Base):
 
     # 交互式二维码正常登陆,但没权限
     def test_interact_permission(self):
-        self.login('12345698754', 4484040029, CardUrl.INTERACT_QR_CODE_TPLUS_QUERY_LOGIN_URL)
+        self.login(Phone.create_phone(), 4484040029, CardUrl.INTERACT_QR_CODE_TPLUS_QUERY_LOGIN_URL)
         interact_error_hint_loc = (By.XPATH, '//*[@id="app"]/div/div[3]/div/p[2]')
         operator = LoginOperator(self.driver)
         self.assertIn("无权查询",  operator.get_text(interact_error_hint_loc))

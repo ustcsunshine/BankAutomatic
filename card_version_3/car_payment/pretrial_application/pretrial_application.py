@@ -19,7 +19,7 @@ class CarPaymentApplyInfo(LoginOperator):
         code = self.driver.find_element_by_xpath('//*[@id="smscode"]')
         print('code: ' + code.text)
         sleep(1)
-        self.send_keys((By.XPATH, '//*[@id="code"]'), code.text)
+        self.send_keys(code.text, (By.XPATH, '//*[@id="code"]'))
         sleep(1)
         self.click((By.XPATH, '//*[@id="bt"]'))
         sleep(2)

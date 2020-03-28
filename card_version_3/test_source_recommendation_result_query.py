@@ -1,8 +1,7 @@
 from time import sleep
-
 from selenium.webdriver.common.by import By
-
 from model import unit_init
+from utils.phone_util import Phone
 from utils.url import CardUrl
 from web.login_operator import LoginOperator
 
@@ -10,7 +9,7 @@ from web.login_operator import LoginOperator
 class SourceRecommendationResultQueryTest(unit_init.Base):
 
     def login(self, url):
-        LoginOperator(self.driver).recommendation_login('13000000000', url)
+        LoginOperator(self.driver).recommendation_login(Phone.create_phone(), url)
         sleep(1)
 
     # 溯源推荐的'立即推荐按钮跳转'

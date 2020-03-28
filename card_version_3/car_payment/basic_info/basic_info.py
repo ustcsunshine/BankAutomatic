@@ -6,6 +6,13 @@ from web.login_operator import LoginOperator
 
 
 class CarPaymentBasicInfo(LoginOperator):
+    def upload_click(self, url, location):
+        self.open(url)
+        sleep(1)
+        self.click((By.XPATH, location))
+
+    def upload_click_no_open(self, location):
+        self.click((By.XPATH, location))
 
     def open_login(self, username, identity, salary, loan, url):
         self.open(url)

@@ -4,6 +4,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 from model import unit_init
+from utils.phone_util import Phone
 from utils.url import CardUrl
 from web.login_operator import LoginOperator
 
@@ -24,7 +25,7 @@ class MgmGiftDeliveryLoginTest(unit_init.Base):
 
     #正常登陆礼品配送登陆
     def test_login_normal(self):
-        self.login("13262576101", CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
+        self.login(Phone.create_phone(), CardUrl.MGM_GIFT_DELIVERY_LOGIN_URL)
         message = self.driver.find_element_by_xpath('//*[@id="app"]/div/p[1]').text
         print(message)
         sleep(1)

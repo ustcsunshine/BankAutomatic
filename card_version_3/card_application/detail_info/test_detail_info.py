@@ -91,7 +91,7 @@ class CardApplicationDetailInfoTest(unit_init.Base):
         base_info_label = self.driver.find_element_by_xpath('/html/body/div[7]')
         self.assertEqual(base_info_label.text, '详细地址不能为空')
 
-    # TODO 停留时间过长
+    # TODO 停留时间过长,由于参数未带过来，解决办法就是从头走流程
     # 详情页的详细地址超过22个字时
     def test_login_detail_home_more(self):
         self.login("上海科技馆有限公", "021", "6951691", "浦东新区来安路500号，浦东新区来安路500号，浦东新区来安路500号", "业务部", "120",

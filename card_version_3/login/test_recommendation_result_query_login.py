@@ -2,6 +2,7 @@ import sys
 from time import sleep
 
 from model import unit_init
+from utils.phone_util import Phone
 from utils.url import CardUrl
 from web.login_operator import LoginOperator
 
@@ -17,32 +18,32 @@ class RecommendationResultQueryTest(unit_init.Base):
 
     # 推荐结果正常登陆
     def test_login_success(self):
-        self.login("12000000102", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
+        self.login(Phone.create_phone(), CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
 
     # 手机号码少一位
     def test_phone_miss(self):
         self.login("1200000010", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
         po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.phone_format_text())
+        self.assertIn("手机号格式不正确", po.phone_error_hint())
 
     # 手机号码有英文
     def test_phone_english(self):
         self.login("120000001m", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
         po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.phone_format_text())
+        self.assertIn("手机号格式不正确", po.phone_error_hint())
 
     # 手机号码null
     def test_phone_null(self):
         self.login("", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
         po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号码不能为空", po.phone_format_text())
+        self.assertIn("手机号码不能为空", po.phone_error_hint())
 
     # 手机号码有空格
     def test_phone_space(self):
         self.login("12345 67676", CardUrl.RECOMMENDATION_RESULT_QUERY_LOGIN_URL)
         po = LoginOperator(self.driver)
         sleep(1)
-        self.assertIn("手机号格式不正确", po.phone_format_text())
+        self.assertIn("手机号格式不正确", po.phone_error_hint())

@@ -109,8 +109,7 @@ class LoginOperator(BasePageOperator):
             self.click((By.XPATH, '//*[@id="app"]/div/div[1]'))
         sleep(2)
 
-    def apply_card(self, username, identity, phone, url):
-        self.open(url)
+    def apply_card(self, username, identity, phone, *kw):
         self.send_keys(username, (By.XPATH, '//input[@placeholder="请输入身份证上的姓名"]'))
         sleep(1)
         self.send_keys(identity, (By.XPATH, '//input[@placeholder="请输入您的18位身份证号码"]'))
@@ -123,6 +122,10 @@ class LoginOperator(BasePageOperator):
         print('code: ' + code.text)
 
         sleep(1)
-        self.send_keys((By.XPATH, '//*[@id="identifyCode"]'), code.text)
+        self.send_keys(code.text, (By.XPATH, '//*[@id="identifyCode"]'))
         sleep(1)
         self.click((By.XPATH, '//*[@id="next"]'))
+
+
+
+

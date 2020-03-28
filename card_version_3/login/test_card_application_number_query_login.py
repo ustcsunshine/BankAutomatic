@@ -2,6 +2,7 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
+from utils.phone_util import Phone
 from web.login_operator import LoginOperator
 from model import unit_init
 from utils import image_util
@@ -32,14 +33,14 @@ class CardNumberQueryLoginTest(unit_init.Base):
 
     #申请进度查询身份证少于18位
     def test_login_identity_miss(self):
-        self.login("51223619780710265", "15765484670", CardUrl.CARD_NUMBER_QUERY_LOGIN_URL)
+        self.login("51223619780710265", Phone.create_phone(), CardUrl.CARD_NUMBER_QUERY_LOGIN_URL)
         sleep(1)
         self.assertIn("身份证号码有误，请确认", self.get_identify_error_text())
         image_util.insert_img(self.driver, "identity_miss.png")
 
     #申请进度查询身份证为空
     def test_login_identity_null(self):
-        self.login("", "15765480006", CardUrl.CARD_NUMBER_QUERY_LOGIN_URL)
+        self.login("", Phone.create_phone(), CardUrl.CARD_NUMBER_QUERY_LOGIN_URL)
         sleep(1)
         self.assertIn("身份证号不能为空", self.get_identify_error_text())
         image_util.insert_img(self.driver, "identity_null.png")
@@ -48,7 +49,7 @@ class CardNumberQueryLoginTest(unit_init.Base):
     def test_login_phone_miss(self):
         self.login("110224199201305248", "1576548467", CardUrl.CARD_NUMBER_QUERY_LOGIN_URL)
         sleep(1)
-        self.assertIn("手机号格式不正确", self.get_identify_error_text())
+        self.assertIn("手机号格式不正确", self.number_phone_error_text())
         image_util.insert_img(self.driver, "phone_miss.png")
 
     #申请进度查询手机号码为空

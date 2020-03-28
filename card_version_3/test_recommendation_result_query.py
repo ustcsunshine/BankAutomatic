@@ -10,8 +10,7 @@ from web.login_operator import LoginOperator
 class RecommendationResultQueryTest(unit_init.Base):
 
     def login(self, url):
-        LoginOperator(self.driver).recommendation_login('12000000000', url)
-        sleep(1)
+        LoginOperator(self.driver).recommendation_login('14000000000', url)
 
     # 推荐结果的'我要推荐按钮跳转'
     def test_recommend_friend(self):
@@ -20,6 +19,7 @@ class RecommendationResultQueryTest(unit_init.Base):
         sleep(2)
         message = self.driver.find_element_by_xpath('//*[@id="app"]/div/div[3]/p').text
         self.assertIn(u'立即推荐', message)
+        sleep(120)
 
     # 推荐结果的'我要分享按钮跳转'
     def test_recommend_share(self):

@@ -9,16 +9,10 @@ class Phone:
         # 第二位数字
         second = random.randint(0, 9)
         # 第三位数字
-        third = {
-            3: random.randint(0, 9),
-            4: random.randint(0, 9),
-            5: random.randint(0, 9),
-            7: random.randint(0, 9),
-            8: random.randint(0, 9),
-        }[second]
+        third = random.randint(0, 9)
 
         # 最后八位数字
-        suffix = random.randint(9999999, 100000000)
+        suffix = random.randint(10000000, 99999999)
 
         # 拼接手机号
         return "1{}{}{}".format(second, third, suffix)

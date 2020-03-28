@@ -1,9 +1,23 @@
+import time
+
 from card_version_3.car_payment.basic_info.basic_info import CarPaymentBasicInfo
 from model import unit_init
 from utils.url import CardUrl
+from utils import file_util
 
 
 class CarPaymentBasicInfoTest(unit_init.Base):
+    def test_upload(self):
+        file_util.upload_file(CarPaymentBasicInfo(self.driver).upload_click,
+                              'https://test.xliane.com/html3/webapp/fastIssue/index.html#/recruit/entry1',
+                              '//*[@id="app"]/div/div[2]/div[2]/img', "/Users/jingjing.li/Downloads/kong.jpeg")
+        time.sleep(3600)
+
+    def test_no_url(self):
+        CarPaymentBasicInfo(self.driver).open('https://test.xliane.com/html3/webapp/fastIssue/index.html#/recruit/entry1')
+        file_util.upload_file(CarPaymentBasicInfo(self.driver).upload_click_no_open,
+                              '//*[@id="app"]/div/div[2]/div[2]/img', "/Users/jingjing.li/Downloads/kong.jpeg")
+        time.sleep(3600)
 
     def car_payment_basic_info_page(self, username, identity, salary, loan, url):
         CarPaymentBasicInfo(self.driver).open_login(username, identity, salary, loan, url)

@@ -12,6 +12,8 @@ class CardApplicationBasicInfo(LoginOperator):
     def login(self, username, identity, phone):
         sleep(2)
         self.click((By.XPATH, '//*[@id="shenqing"]'))
+        # sleep(2)
+        # self.click((By.XPATH, '//*[@id="pay"]/a'))＃办卡提示
 
         self.send_keys(username, (By.XPATH, '//input[@placeholder="请输入身份证上的姓名"]'))
         sleep(1)
@@ -30,4 +32,7 @@ class CardApplicationBasicInfo(LoginOperator):
         self.click((By.XPATH, '/html/body/div[8]/img'))
         sleep(1)
         self.click((By.XPATH, '//*[@id="next"]'))
-        sleep(2)
+
+
+
+
